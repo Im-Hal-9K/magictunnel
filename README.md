@@ -18,11 +18,21 @@ MagicTunnel provides **one smart tool** that:
 
 > Semantic search is **optional**. The server runs in `rule_based` or `llm_based` discovery mode without any embeddings on disk. Ollama or an OpenAI key is required only for those richer discovery modes — not for the server to start.
 
+### Prerequisites
+
+- **Rust 1.70+** (`rustup` recommended)
+- **`protoc`** (Protocol Buffers compiler) — required by `tonic-build` during `cargo build`
+  - Windows: `scoop bucket add extras && scoop install protobuf` (or `choco install protoc`)
+  - macOS: `brew install protobuf`
+  - Linux: `apt install protobuf-compiler` (Debian/Ubuntu) / `dnf install protobuf-compiler` (Fedora)
+- **OpenAI API key** *or* a running Ollama instance — only needed if you want LLM/semantic discovery modes; not required to start the server
+
 ### Windows (PowerShell)
 
 ```powershell
 git clone https://github.com/your-org/magictunnel.git
 cd magictunnel
+# Prereqs (one-time): see Prerequisites above; protoc must be on PATH
 cargo build --release
 Copy-Item config.yaml.template magictunnel-config.yaml
 # Edit magictunnel-config.yaml — at minimum, set the llm_provider section if you want LLM-based discovery
