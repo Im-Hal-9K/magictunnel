@@ -1982,7 +1982,7 @@ impl Config {
     /// Validate cross-dependencies between configuration sections
     fn validate_cross_dependencies(&self) -> Result<()> {
         // Validate that gRPC port doesn't conflict with HTTP port
-        let grpc_port = match self.server.port.checked_add(1000) {
+        let _grpc_port = match self.server.port.checked_add(1000) {
             Some(port) => port,
             None => {
                 return Err(ProxyError::config(format!(
@@ -1991,12 +1991,6 @@ impl Config {
                 )));
             }
         };
-        if grpc_port > 65535 {
-            return Err(ProxyError::config(format!(
-                "gRPC port {} (HTTP port + 1000) exceeds maximum port number 65535",
-                grpc_port
-            )));
-        }
 
         // Validate that authentication is properly configured if enabled
         if let Some(ref auth) = self.auth {

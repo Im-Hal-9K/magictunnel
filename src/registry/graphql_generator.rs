@@ -9533,7 +9533,7 @@ type User {
         let string_value = serde_json::Value::String("test".to_string());
         let int_value = serde_json::Value::Number(serde_json::Number::from(42));
         let bool_value = serde_json::Value::Bool(true);
-        let float_value = serde_json::Value::Number(serde_json::Number::from_f64(3.14).unwrap());
+        let float_value = serde_json::Value::Number(serde_json::Number::from_f64(2.5).unwrap());
 
         // Valid type matches
         assert!(generator.validate_default_value_type(&string_value, "String").is_ok());
