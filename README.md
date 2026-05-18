@@ -16,7 +16,28 @@ MagicTunnel provides **one smart tool** that:
 
 ## Quick Start
 
-### Full Stack Setup (Recommended)
+> Semantic search is **optional**. The server runs in `rule_based` or `llm_based` discovery mode without any embeddings on disk. Ollama or an OpenAI key is required only for those richer discovery modes — not for the server to start.
+
+### Windows (PowerShell)
+
+```powershell
+git clone https://github.com/your-org/magictunnel.git
+cd magictunnel
+cargo build --release
+Copy-Item config.yaml.template magictunnel-config.yaml
+# Edit magictunnel-config.yaml — at minimum, set the llm_provider section if you want LLM-based discovery
+.\target\release\magictunnel.exe --config magictunnel-config.yaml
+
+# In another shell, test smart discovery:
+curl.exe -X POST http://localhost:3001/v1/mcp/call `
+  -H "Content-Type: application/json" `
+  -d '{\"name\":\"smart_tool_discovery\",\"arguments\":{\"request\":\"ping google.com\"}}'
+```
+
+Convenience helper: `.\dev.ps1` (debug build + run) or `.\dev.ps1 -Release`.
+
+### macOS / Linux — Full Stack (with web dashboard)
+
 ```bash
 # Clone and build
 git clone https://github.com/your-org/magictunnel.git
@@ -35,19 +56,21 @@ open http://localhost:5173/dashboard
 curl -X POST http://localhost:3001/v1/mcp/call \
   -H "Content-Type: application/json" \
   -d '{
-    "name": "smart_tool_discovery", 
+    "name": "smart_tool_discovery",
     "arguments": {"request": "ping google.com"}
   }'
 ```
 
-### Lightweight Setup (MCP Server Only)
+### macOS / Linux — Lightweight (MCP server only)
+
 ```bash
 # Run standalone MCP server (no web dashboard)
 ./magictunnel
 ```
 
-### Setup with Smart Discovery (Recommended)
-For the best experience with local semantic searc (Requires Ollama embedding model):
+### Setup with Semantic Search (Optional, macOS / Linux)
+
+For the best experience with local semantic search (requires Ollama embedding model):
 
 ```bash
 # Install Ollama (optional - for local semantic search)
