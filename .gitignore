@@ -20,6 +20,7 @@ Cargo.toml.bak
 .vscode/
 .idea/
 .cursorignore
+.claude/
 *.swp
 *.swo
 *~
