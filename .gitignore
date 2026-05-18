@@ -13,7 +13,7 @@ target/debug/magictunnel
 target/debug/magictunnel-supervisor
 
 # Cargo
-Cargo.lock
+# Cargo.lock IS tracked for this binary project (reproducible builds + audit)
 Cargo.toml.bak
 
 # IDE and editor files
